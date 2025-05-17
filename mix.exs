@@ -10,6 +10,8 @@ defmodule FinanceEquations.MixProject do
       version: @version,
       elixir: "~> 1.18",
       start_permanent: Mix.env() == :prod,
+      deps: deps(),
+
       description:
         "A collection of essential financial formulas and models implemented in Elixir. Covers topics such as interest calculations, present and future value, annuities, loan amortization, investment returns, and risk metrics",
       package: package()

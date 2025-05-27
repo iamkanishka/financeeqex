@@ -16,6 +16,7 @@ defmodule FinancialEquations.InvestmentReturnFormulas do
       iex> FinancialEquations.InvestmentReturnFormulas.return_on_investment(2000, 10000)
       20.0
   """
+  @spec return_on_investment(number(), number()) :: number()
   def return_on_investment(net_profit, initial_investment) do
     (net_profit / initial_investment) * 100
   end
@@ -32,6 +33,7 @@ defmodule FinancialEquations.InvestmentReturnFormulas do
       iex> FinancialEquations.InvestmentReturnFormulas.net_present_value([1000, 1000, 1000], 0.1, 2500)
       248.685
   """
+  @spec net_present_value(list(number()), number(), number()) :: number()
   def net_present_value(cash_flows, rate, initial_investment) do
     discounted_cash_flows =
       cash_flows
@@ -53,6 +55,7 @@ defmodule FinancialEquations.InvestmentReturnFormulas do
       iex> FinancialEquations.InvestmentReturnFormulas.payback_period(10000, 2500)
       4.0
   """
+  @spec payback_period(number(), number()) :: number()
   def payback_period(initial_investment, annual_cash_flow) do
     initial_investment / annual_cash_flow
   end
@@ -69,6 +72,7 @@ defmodule FinancialEquations.InvestmentReturnFormulas do
       iex> FinancialEquations.InvestmentReturnFormulas.discounted_payback_period([1000, 1000, 1000, 1000], 0.1, 3000)
       4
   """
+  @spec discounted_payback_period(list(number()), number(), number()) :: integer()
   def discounted_payback_period(cash_flows, rate, initial_investment) do
     {period, _} =
       cash_flows
@@ -99,6 +103,7 @@ defmodule FinancialEquations.InvestmentReturnFormulas do
       iex> FinancialEquations.InvestmentReturnFormulas.profitability_index([1000, 1000, 1000], 0.1, 2500)
       0.999474
   """
+  @spec profitability_index(list(number()), number(), number()) :: number()
   def profitability_index(cash_flows, rate, initial_investment) do
     discounted_cash_flows =
       cash_flows
@@ -121,6 +126,7 @@ defmodule FinancialEquations.InvestmentReturnFormulas do
       iex> FinancialEquations.InvestmentReturnFormulas.capital_asset_pricing_model(0.03, 1.2, 0.1)
       0.114
   """
+  @spec capital_asset_pricing_model(number(), number(), number()) :: number()
   def capital_asset_pricing_model(risk_free_rate, beta, market_return) do
     risk_free_rate + beta * (market_return - risk_free_rate)
   end
@@ -137,6 +143,7 @@ defmodule FinancialEquations.InvestmentReturnFormulas do
       iex> FinancialEquations.InvestmentReturnFormulas.dividend_discount_model(2, 0.1, 0.05)
       40.0
   """
+  @spec dividend_discount_model(number(), number(), number()) :: number()
   def dividend_discount_model(dividend, rate, growth_rate) do
     dividend / (rate - growth_rate)
   end
@@ -154,6 +161,7 @@ defmodule FinancialEquations.InvestmentReturnFormulas do
       iex> FinancialEquations.InvestmentReturnFormulas.present_value_bond(50, 0.05, 3, 1000)
       1000.0
   """
+  @spec present_value_bond(number(), number(), number(), number()) :: number()
   def present_value_bond(coupon, rate, periods, face_value) do
     coupon_payments =
       1..periods
@@ -175,6 +183,7 @@ defmodule FinancialEquations.InvestmentReturnFormulas do
       iex> FinancialEquations.InvestmentReturnFormulas.current_yield(50, 1000)
       0.05
   """
+  @spec current_yield(number(), number()) :: number()
   def current_yield(coupon, price) do
     coupon / price
   end
@@ -192,6 +201,7 @@ defmodule FinancialEquations.InvestmentReturnFormulas do
       iex> FinancialEquations.InvestmentReturnFormulas.yield_to_maturity(50, 1000, 950, 3)
       0.0625
   """
+  @spec yield_to_maturity(number(), number(), number(), number()) :: number()
   def yield_to_maturity(coupon, face_value, price, periods) do
     (coupon + (face_value - price) / periods) / ((face_value + price) / 2)
   end
@@ -208,6 +218,7 @@ defmodule FinancialEquations.InvestmentReturnFormulas do
       iex> FinancialEquations.InvestmentReturnFormulas.modified_duration(3, 0.05, 1)
       2.857142857142857
   """
+  @spec modified_duration(number(), number(), number()) :: number()
   def modified_duration(duration, rate, periods_per_year) do
     duration / (1 + rate / periods_per_year)
   end
@@ -226,6 +237,7 @@ defmodule FinancialEquations.InvestmentReturnFormulas do
       iex> FinancialEquations.InvestmentReturnFormulas.convexity([50, 50, 1050], 0.05, 1000)
       8.843537414965986
   """
+  @spec convexity(list(), number(), number()) :: number()
   def convexity(cash_flows, rate, price) do
     sum =
       cash_flows

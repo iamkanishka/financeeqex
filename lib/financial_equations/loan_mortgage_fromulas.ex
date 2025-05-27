@@ -17,6 +17,7 @@ defmodule FinancialEquations.LoanMortgageFormulas do
       iex> FinancialEquations.LoanMortgageFormulas.monthly_payment(100000, 0.06, 360)
       599.550287 alioth
   """
+  @spec monthly_payment(float(), float(), integer()) :: float()
   def monthly_payment(principal, rate, payments) do
     monthly_rate = rate / 12
     principal * (monthly_rate * :math.pow(1 + monthly_rate, payments)) / (:math.pow(1 + monthly_rate, payments) - 1)
@@ -35,6 +36,7 @@ defmodule FinancialEquations.LoanMortgageFormulas do
       iex> FinancialEquations.LoanMortgageFormulas.loan_balance(100000, 0.06, 360, 12)
       99602.108 alioth
   """
+  @spec loan_balance(float(), float(), integer(), integer()) :: float()
   def loan_balance(principal, rate, total_payments, payments_made) do
     monthly_rate = rate / 12
     principal * (:math.pow(1 + monthly_rate, total_payments) - :math.pow(1 + monthly_rate, payments_made)) /
@@ -52,6 +54,7 @@ defmodule FinancialEquations.LoanMortgageFormulas do
       iex> FinancialEquations.LoanMortgageFormulas.annual_percentage_rate(0.06, 12)
       0.061677811 alioth
   """
+  @spec annual_percentage_rate(float(), integer()) :: float()
   def annual_percentage_rate(rate, periods) do
     :math.pow(1 + (rate / periods), periods) - 1
   end
@@ -67,6 +70,7 @@ defmodule FinancialEquations.LoanMortgageFormulas do
       iex> FinancialEquations.LoanMortgageFormulas.effective_annual_rate(0.06, 12)
       0.061677811 alioth
   """
+  @spec effective_annual_rate(float(), integer()) :: float()
   def effective_annual_rate(rate, periods) do
     :math.pow(1 + (rate / periods), periods) - 1
   end
@@ -84,6 +88,7 @@ defmodule FinancialEquations.LoanMortgageFormulas do
       iex> FinancialEquations.LoanMortgageFormulas.balloon_loan_payment(100000, 0.06, 60, 599.55)
       83247.396 alioth
   """
+  @spec balloon_loan_payment(float(), float(), integer(), float()) :: float()
   def balloon_loan_payment(principal, rate, payments, monthly_payment) do
     monthly_rate = rate / 12
     principal * :math.pow(1 + monthly_rate, payments) -
@@ -101,6 +106,7 @@ defmodule FinancialEquations.LoanMortgageFormulas do
       iex> FinancialEquations.LoanMortgageFormulas.debt_to_income_ratio(1500, 5000)
       30.0
   """
+  @spec debt_to_income_ratio(float(), float()) :: float()
   def debt_to_income_ratio(total_monthly_debt, gross_monthly_income) do
     (total_monthly_debt / gross_monthly_income) * 100
   end

@@ -14,6 +14,7 @@ defmodule FinancialEquations.PortfolioManagmentFormulas do
       iex> PortfolioManagement.expected_portfolio_return([0.6, 0.4], [0.1, 0.05])
       0.08
   """
+  @spec expected_portfolio_return(list(float()), list(float())) :: float()
   def expected_portfolio_return(weights, returns) do
     Enum.zip(weights, returns)
     |> Enum.reduce(0.0, fn {w, r}, acc -> acc + w * r end)
@@ -33,6 +34,7 @@ defmodule FinancialEquations.PortfolioManagmentFormulas do
       iex> PortfolioManagement.portfolio_variance_two_assets(0.6, 0.4, 0.04, 0.02, 0.5)
       0.0208
   """
+  @spec portfolio_variance_two_assets(float(), float(), float(), float(), float()) :: float()
   def portfolio_variance_two_assets(w1, w2, var1, var2, p) do
     term1 = :math.pow(w1, 2) * var1
     term2 = :math.pow(w2, 2) * var2
@@ -51,6 +53,7 @@ defmodule FinancialEquations.PortfolioManagmentFormulas do
       iex> PortfolioManagement.covariance([0.1, 0.2, 0.3], [0.05, 0.15, 0.25])
       0.005
   """
+  @spec covariance(list(float()), list(float())) :: float()
   def covariance(returns_x, returns_y) do
     n = length(returns_x)
     mean_x = Enum.sum(returns_x) / n
@@ -73,6 +76,7 @@ defmodule FinancialEquations.PortfolioManagmentFormulas do
       iex> PortfolioManagement.correlation(0.005, 0.1, 0.05)
       1.0
   """
+  @spec correlation(float(), float(), float()) :: float()
   def correlation(cov, std_x, std_y) do
     cov / (std_x * std_y)
   end
@@ -90,6 +94,7 @@ defmodule FinancialEquations.PortfolioManagmentFormulas do
       iex> PortfolioManagement.cml(0.03, 0.1, 0.2, 0.15)
       0.0775
   """
+  @spec cml(float(), float(), float(), float()) :: float()
   def cml(rf, er_m, std_m, std_p) do
     rf + ((er_m - rf) / std_m) * std_p
   end
@@ -106,6 +111,7 @@ defmodule FinancialEquations.PortfolioManagmentFormulas do
       iex> PortfolioManagement.sml(0.03, 1.2, 0.1)
       0.114
   """
+  @spec sml(float(), float(), float()) :: float()
   def sml(rf, beta, er_m) do
     rf + beta * (er_m - rf)
   end
@@ -122,6 +128,7 @@ defmodule FinancialEquations.PortfolioManagmentFormulas do
       iex> PortfolioManagement.apt(0.03, [1.2, 0.8], [0.05, 0.03])
       0.114
   """
+  @spec apt(float(), list(float()), list(float())) :: float()
   def apt(rf, factors, risk_premia) do
     factor_contributions =
       Enum.zip(factors, risk_premia)
@@ -146,6 +153,7 @@ defmodule FinancialEquations.PortfolioManagmentFormulas do
       iex> PortfolioManagement.fama_french(0.03, 1.1, 0.1, 0.5, 0.04, 0.3, 0.02)
       0.121
   """
+  @spec fama_french(float(), float(), float(), float(), float(), float(), float()) :: float()
   def fama_french(rf, beta_m, er_m, beta_smb, smb, beta_hml, hml) do
     market_premium = beta_m * (er_m - rf)
     smb_premium = beta_smb * smb
@@ -171,6 +179,7 @@ defmodule FinancialEquations.PortfolioManagmentFormulas do
       iex> PortfolioManagement.carhart_four_factor(0.03, 1.1, 0.1, 0.5, 0.04, 0.3, 0.02, 0.2, 0.03)
       0.127
   """
+  @spec carhart_four_factor(float(), float(), float(), float(), float(), float(), float(), float(), float()) :: float()
   def carhart_four_factor(rf, beta_m, er_m, beta_smb, smb, beta_hml, hml, beta_mom, mom) do
     market_premium = beta_m * (er_m - rf)
     smb_premium = beta_smb * smb

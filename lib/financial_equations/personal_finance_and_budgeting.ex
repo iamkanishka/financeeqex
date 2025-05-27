@@ -15,6 +15,7 @@ defmodule FinancialEquations.PersonalFinanceFormulas do
       iex> FinancialEquations.PersonalFinanceFormulas.rule_of_72(0.08)
       9.0
   """
+  @spec rule_of_72(float()) :: float()
   def rule_of_72(interest_rate) do
     72 / (interest_rate * 100)
   end
@@ -29,6 +30,7 @@ defmodule FinancialEquations.PersonalFinanceFormulas do
       iex> FinancialEquations.PersonalFinanceFormulas.rule_of_114(0.06)
       19.0
   """
+  @spec rule_of_114(float()) :: float()
   def rule_of_114(interest_rate) do
     114 / (interest_rate * 100)
   end
@@ -43,6 +45,7 @@ defmodule FinancialEquations.PersonalFinanceFormulas do
       iex> FinancialEquations.PersonalFinanceFormulas.rule_of_144(0.04)
       36.0
   """
+  @spec rule_of_144(float()) :: float()
   def rule_of_144(interest_rate) do
     144 / (interest_rate * 100)
   end
@@ -57,6 +60,7 @@ defmodule FinancialEquations.PersonalFinanceFormulas do
       iex> FinancialEquations.PersonalFinanceFormulas.retirement_corpus_needed(40000)
       1000000.0
   """
+  @spec retirement_corpus_needed(float()) :: float()
   def retirement_corpus_needed(annual_expenses) do
     annual_expenses / 0.04
   end
@@ -73,6 +77,7 @@ defmodule FinancialEquations.PersonalFinanceFormulas do
       iex> FinancialEquations.PersonalFinanceFormulas.emergency_fund(5000)
       {15000, 30000}
   """
+  @spec emergency_fund(float()) :: {float(), float()}
   def emergency_fund(monthly_expenses) do
     {3 * monthly_expenses, 6 * monthly_expenses}
   end
@@ -90,6 +95,7 @@ defmodule FinancialEquations.PersonalFinanceFormulas do
       iex> FinancialEquations.PersonalFinanceFormulas.future_value_savings(1000, 0.05, 1, 2)
       1102.5
   """
+  @spec future_value_savings(float(), float(), integer(), integer()) :: float()
   def future_value_savings(principal, rate, periods_per_year, years) do
     principal * :math.pow(1 + rate / periods_per_year, periods_per_year * years)
   end
@@ -106,6 +112,7 @@ defmodule FinancialEquations.PersonalFinanceFormulas do
       iex> FinancialEquations.PersonalFinanceFormulas.budget_50_30_20_rule(5000)
       {2500.0, 1500.0, 1000.0}
   """
+  @spec budget_50_30_20_rule(float()) :: {float(), float(), float()}
   def budget_50_30_20_rule(monthly_income) do
     needs = monthly_income * 0.5
     wants = monthly_income * 0.3
@@ -125,6 +132,7 @@ defmodule FinancialEquations.PersonalFinanceFormulas do
       iex> FinancialEquations.PersonalFinanceFormulas.credit_card_interest(1000, 0.15, 30)
       12.328767123287671
   """
+  @spec credit_card_interest(float(), float(), integer()) :: float()
   def credit_card_interest(average_daily_balance, apr, days_in_billing_cycle) do
     average_daily_balance * (apr / 365) * days_in_billing_cycle
   end
@@ -139,6 +147,7 @@ defmodule FinancialEquations.PersonalFinanceFormulas do
       iex> FinancialEquations.PersonalFinanceFormulas.debt_snowball([{"Debt A", 500, 0.05}, {"Debt B", 200, 0.1}, {"Debt C", 1000, 0.03}])
       ["Debt B", "Debt A", "Debt C"]
   """
+  @spec debt_snowball(list()) :: list()
   def debt_snowball(debts) do
     debts
     |> Enum.sort_by(fn {_, amount, _} -> amount end)
@@ -155,6 +164,7 @@ defmodule FinancialEquations.PersonalFinanceFormulas do
       iex> FinancialEquations.PersonalFinanceFormulas.debt_avalanche([{"Debt A", 500, 0.05}, {"Debt B", 200, 0.1}, {"Debt C", 1000, 0.03}])
       ["Debt B", "Debt A", "Debt C"]
   """
+  @spec debt_avalanche(list()) :: list()
   def debt_avalanche(debts) do
     debts
     |> Enum.sort_by(fn {_, _, interest_rate} -> -interest_rate end)
@@ -172,6 +182,7 @@ defmodule FinancialEquations.PersonalFinanceFormulas do
       iex> FinancialEquations.PersonalFinanceFormulas.net_worth(50000, 20000)
       30000
   """
+  @spec net_worth(number, number) :: number
   def net_worth(total_assets, total_liabilities) do
     total_assets - total_liabilities
   end

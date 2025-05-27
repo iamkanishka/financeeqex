@@ -15,6 +15,7 @@ defmodule FinancialEquations.BusinessAccountingFormulas do
       iex> FinancialEquations.BusinessAccountingFormulas.gross_profit(10000, 6000)
       4000
   """
+  @spec gross_profit(number(), number()) :: number()
   def gross_profit(revenue, cogs) do
     revenue - cogs
   end
@@ -30,6 +31,7 @@ defmodule FinancialEquations.BusinessAccountingFormulas do
       iex> FinancialEquations.BusinessAccountingFormulas.net_profit_margin(2000, 10000)
       20.0
   """
+  @spec net_profit_margin(number(), number()) :: number()
   def net_profit_margin(net_profit, revenue) do
     (net_profit / revenue) * 100
   end
@@ -45,6 +47,7 @@ defmodule FinancialEquations.BusinessAccountingFormulas do
       iex> FinancialEquations.BusinessAccountingFormulas.gross_margin(4000, 10000)
       40.0
   """
+  @spec gross_margin(number(), number()) :: number()
   def gross_margin(gross_profit, revenue) do
     (gross_profit / revenue) * 100
   end
@@ -60,6 +63,7 @@ defmodule FinancialEquations.BusinessAccountingFormulas do
       iex> FinancialEquations.BusinessAccountingFormulas.operating_margin(3000, 10000)
       30.0
   """
+  @spec operating_margin(number(), number()) :: number()
   def operating_margin(operating_income, revenue) do
     (operating_income / revenue) * 100
   end
@@ -75,6 +79,7 @@ defmodule FinancialEquations.BusinessAccountingFormulas do
       iex> FinancialEquations.BusinessAccountingFormulas.ebitda(10000, 5000)
       5000
   """
+  @spec ebitda(number(), number()) :: number()
   def ebitda(revenue, expenses) do
     revenue - expenses
   end
@@ -91,6 +96,7 @@ defmodule FinancialEquations.BusinessAccountingFormulas do
       iex> FinancialEquations.BusinessAccountingFormulas.earnings_per_share(2000, 200, 900)
       2.0
   """
+  @spec earnings_per_share(number(), number(), number()) :: number()
   def earnings_per_share(net_income, preferred_dividends, average_outstanding_shares) do
     (net_income - preferred_dividends) / average_outstanding_shares
   end
@@ -106,6 +112,7 @@ defmodule FinancialEquations.BusinessAccountingFormulas do
       iex> FinancialEquations.BusinessAccountingFormulas.price_to_earnings_ratio(20, 2)
       10.0
   """
+  @spec price_to_earnings_ratio(number(), number()) :: number()
   def price_to_earnings_ratio(market_price_per_share, eps) do
     market_price_per_share / eps
   end
@@ -121,6 +128,7 @@ defmodule FinancialEquations.BusinessAccountingFormulas do
       iex> FinancialEquations.BusinessAccountingFormulas.price_to_book_ratio(20, 10)
       2.0
   """
+  @spec price_to_book_ratio(number(), number()) :: number()
   def price_to_book_ratio(market_price_per_share, book_value_per_share) do
     market_price_per_share / book_value_per_share
   end
@@ -136,6 +144,7 @@ defmodule FinancialEquations.BusinessAccountingFormulas do
       iex> FinancialEquations.BusinessAccountingFormulas.return_on_equity(2000, 10000)
       20.0
   """
+  @spec return_on_equity(number(), number()) :: number()
   def return_on_equity(net_income, shareholders_equity) do
     (net_income / shareholders_equity) * 100
   end
@@ -151,6 +160,7 @@ defmodule FinancialEquations.BusinessAccountingFormulas do
       iex> FinancialEquations.BusinessAccountingFormulas.return_on_assets(2000, 20000)
       10.0
   """
+  @spec return_on_assets(number(), number()) :: number()
   def return_on_assets(net_income, total_assets) do
     (net_income / total_assets) * 100
   end
@@ -166,6 +176,7 @@ defmodule FinancialEquations.BusinessAccountingFormulas do
       iex> FinancialEquations.BusinessAccountingFormulas.debt_to_equity_ratio(5000, 10000)
       0.5
   """
+  @spec debt_to_equity_ratio(number(), number()) :: number()
   def debt_to_equity_ratio(total_liabilities, shareholders_equity) do
     total_liabilities / shareholders_equity
   end
@@ -181,6 +192,7 @@ defmodule FinancialEquations.BusinessAccountingFormulas do
       iex> FinancialEquations.BusinessAccountingFormulas.current_ratio(15000, 5000)
       3.0
   """
+  @spec current_ratio(number(), number()) :: number()
   def current_ratio(current_assets, current_liabilities) do
     current_assets / current_liabilities
   end
@@ -197,6 +209,7 @@ defmodule FinancialEquations.BusinessAccountingFormulas do
       iex> FinancialEquations.BusinessAccountingFormulas.quick_ratio(15000, 3000, 5000)
       2.4
   """
+  @spec quick_ratio(number(), number(), number()) :: number()
   def quick_ratio(current_assets, inventory, current_liabilities) do
     (current_assets - inventory) / current_liabilities
   end
@@ -212,6 +225,7 @@ defmodule FinancialEquations.BusinessAccountingFormulas do
       iex> FinancialEquations.BusinessAccountingFormulas.working_capital(15000, 5000)
       10000
   """
+  @spec working_capital(number(), number()) :: number()
   def working_capital(current_assets, current_liabilities) do
     current_assets - current_liabilities
   end
@@ -227,6 +241,7 @@ defmodule FinancialEquations.BusinessAccountingFormulas do
       iex> FinancialEquations.BusinessAccountingFormulas.inventory_turnover(6000, 2000)
       3.0
   """
+  @spec inventory_turnover(number(), number()) :: number()
   def inventory_turnover(cogs, average_inventory) do
     cogs / average_inventory
   end
@@ -242,6 +257,7 @@ defmodule FinancialEquations.BusinessAccountingFormulas do
       iex> FinancialEquations.BusinessAccountingFormulas.receivables_turnover(10000, 2500)
       4.0
   """
+  @spec receivables_turnover(number(), number()) :: number()
   def receivables_turnover(net_credit_sales, average_accounts_receivable) do
     net_credit_sales / average_accounts_receivable
   end
@@ -257,6 +273,7 @@ defmodule FinancialEquations.BusinessAccountingFormulas do
       iex> FinancialEquations.BusinessAccountingFormulas.days_sales_outstanding(2500, 10000)
       91.25
   """
+  @spec days_sales_outstanding(number(), number()) :: number()
   def days_sales_outstanding(accounts_receivable, annual_sales) do
     (accounts_receivable / annual_sales) * 365
   end
@@ -272,6 +289,7 @@ defmodule FinancialEquations.BusinessAccountingFormulas do
       iex> FinancialEquations.BusinessAccountingFormulas.days_payable_outstanding(1500, 6000)
       91.25
   """
+  @spec days_payable_outstanding(number(), number()) :: number()
   def days_payable_outstanding(accounts_payable, cogs) do
     (accounts_payable / cogs) * 365
   end

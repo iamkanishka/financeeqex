@@ -16,6 +16,7 @@ defmodule FinancialEquations.ForexAndInternationalFormulas do
       iex> FinancialEquations.ForexInternationalFormulas.currency_exchange_direct(1000, 0.013)
       13.0
   """
+  @spec currency_exchange_direct(float(), float()) :: float()
   def currency_exchange_direct(domestic_amount, exchange_rate) do
     domestic_amount * exchange_rate
   end
@@ -31,6 +32,7 @@ defmodule FinancialEquations.ForexAndInternationalFormulas do
       iex> FinancialEquations.ForexInternationalFormulas.cross_currency_rate(0.85, 1.25)
       0.68
   """
+  @spec cross_currency_rate(float(), float()) :: float()
   def cross_currency_rate(rate_a_usd, rate_b_usd) do
     rate_a_usd / rate_b_usd
   end
@@ -47,6 +49,7 @@ defmodule FinancialEquations.ForexAndInternationalFormulas do
       iex> FinancialEquations.ForexInternationalFormulas.purchasing_power_parity(1.0, 0.02, 0.03)
       0.9902912621359223
   """
+  @spec purchasing_power_parity(float(), float(), float()) :: float()
   def purchasing_power_parity(spot_rate, domestic_inflation, foreign_inflation) do
     spot_rate * (1 + domestic_inflation) / (1 + foreign_inflation)
   end
@@ -63,6 +66,7 @@ defmodule FinancialEquations.ForexAndInternationalFormulas do
       iex> FinancialEquations.ForexInternationalFormulas.interest_rate_parity(1.0, 0.04, 0.05)
       0.9904761904761905
   """
+  @spec interest_rate_parity(float(), float(), float()) :: float()
   def interest_rate_parity(spot_rate, domestic_interest_rate, foreign_interest_rate) do
     spot_rate * (1 + domestic_interest_rate) / (1 + foreign_interest_rate)
   end

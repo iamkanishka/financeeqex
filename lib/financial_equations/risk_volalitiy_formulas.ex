@@ -15,6 +15,7 @@ defmodule FinancialEquations.RiskVolatilityFormulas do
       iex> FinancialEquations.RiskVolatilityFormulas.standard_deviation([0.1, 0.2, 0.3])
       0.0816496580927726
   """
+  @spec standard_deviation(list(float())) :: float()
   def standard_deviation(returns) do
     n = length(returns)
     mean = Enum.sum(returns) / n
@@ -32,6 +33,7 @@ defmodule FinancialEquations.RiskVolatilityFormulas do
       iex> FinancialEquations.RiskVolatilityFormulas.variance([0.1, 0.2, 0.3])
       0.006666666666666667
   """
+  @spec variance(list(float())) :: float()
   def variance(returns) do
     n = length(returns)
     mean = Enum.sum(returns) / n
@@ -49,6 +51,7 @@ defmodule FinancialEquations.RiskVolatilityFormulas do
       iex> FinancialEquations.RiskVolatilityFormulas.beta([0.1, 0.2, 0.3], [0.05, 0.15, 0.25])
       1.0
   """
+  @spec beta(list(float()), list(float())) :: float()
   def beta(portfolio_returns, market_returns) do
     covariance(portfolio_returns, market_returns) / variance(market_returns)
   end
@@ -65,6 +68,7 @@ defmodule FinancialEquations.RiskVolatilityFormulas do
       iex> FinancialEquations.RiskVolatilityFormulas.sharpe_ratio(0.1, 0.02, 0.15)
       0.5333333333333333
   """
+  @spec sharpe_ratio(float(), float(), float()) :: float()
   def sharpe_ratio(portfolio_return, risk_free_rate, portfolio_std_dev) do
     (portfolio_return - risk_free_rate) / portfolio_std_dev
   end
@@ -81,6 +85,7 @@ defmodule FinancialEquations.RiskVolatilityFormulas do
       iex> FinancialEquations.RiskVolatilityFormulas.sortino_ratio(0.1, 0.02, 0.12)
       0.6666666666666666
   """
+  @spec sortino_ratio(float(), float(), float()) :: float()
   def sortino_ratio(portfolio_return, risk_free_rate, downside_deviation) do
     (portfolio_return - risk_free_rate) / downside_deviation
   end
@@ -97,6 +102,7 @@ defmodule FinancialEquations.RiskVolatilityFormulas do
       iex> FinancialEquations.RiskVolatilityFormulas.treynor_ratio(0.1, 0.02, 1.2)
       0.06666666666666667
   """
+  @spec treynor_ratio(float(), float(), float()) :: float()
   def treynor_ratio(portfolio_return, risk_free_rate, portfolio_beta) do
     (portfolio_return - risk_free_rate) / portfolio_beta
   end
@@ -114,6 +120,7 @@ defmodule FinancialEquations.RiskVolatilityFormulas do
       iex> FinancialEquations.RiskVolatilityFormulas.jensens_alpha(0.1, 0.02, 1.2, 0.08)
       0.016
   """
+  @spec jensens_alpha(float(), float(), float(), float()) :: float()
   def jensens_alpha(portfolio_return, risk_free_rate, portfolio_beta, market_return) do
     portfolio_return - (risk_free_rate + portfolio_beta * (market_return - risk_free_rate))
   end
@@ -132,6 +139,7 @@ defmodule FinancialEquations.RiskVolatilityFormulas do
       iex> FinancialEquations.RiskVolatilityFormulas.value_at_risk(100000, 0.95, 0.02, 1)
       3290.0
   """
+  @spec value_at_risk(float(), float(), float(), integer()) :: float()
   def value_at_risk(portfolio_value, confidence_level, volatility, time_horizon) do
     # Z-scores for common confidence levels (normal distribution)
     z_scores = %{
@@ -144,6 +152,7 @@ defmodule FinancialEquations.RiskVolatilityFormulas do
   end
 
   # Helper function to calculate covariance
+  @spec covariance(list(float()), list(float())) :: float()
   defp covariance(returns1, returns2) do
     n = length(returns1)
     mean1 = Enum.sum(returns1) / n

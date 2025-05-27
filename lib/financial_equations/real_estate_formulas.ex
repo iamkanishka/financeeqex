@@ -16,6 +16,7 @@ defmodule FinancialEquations.RealEstateFormulas do
       iex> FinancialEquations.RealEstateFormulas.loan_to_value_ratio(80000, 100000)
       80.0
   """
+  @spec loan_to_value_ratio(number(), number()) :: number()
   def loan_to_value_ratio(loan_amount, property_value) do
     (loan_amount / property_value) * 100
   end
@@ -31,6 +32,7 @@ defmodule FinancialEquations.RealEstateFormulas do
       iex> FinancialEquations.RealEstateFormulas.cap_rate(12000, 150000)
       8.0
   """
+  @spec cap_rate(number(), number()) :: number()
   def cap_rate(net_operating_income, property_value) do
     (net_operating_income / property_value) * 100
   end
@@ -46,6 +48,7 @@ defmodule FinancialEquations.RealEstateFormulas do
       iex> FinancialEquations.RealEstateFormulas.cash_on_cash_return(5000, 50000)
       10.0
   """
+  @spec cash_on_cash_return(number(), number()) :: number()
   def cash_on_cash_return(annual_pre_tax_cash_flow, total_cash_invested) do
     (annual_pre_tax_cash_flow / total_cash_invested) * 100
   end
@@ -61,6 +64,7 @@ defmodule FinancialEquations.RealEstateFormulas do
       iex> FinancialEquations.RealEstateFormulas.gross_rent_multiplier(150000, 18000)
       8.333333333333334
   """
+  @spec gross_rent_multiplier(number(), number()) :: number()
   def gross_rent_multiplier(property_price, annual_gross_rental_income) do
     property_price / annual_gross_rental_income
   end
@@ -76,6 +80,7 @@ defmodule FinancialEquations.RealEstateFormulas do
       iex> FinancialEquations.RealEstateFormulas.debt_service_coverage_ratio(12000, 8000)
       1.5
   """
+  @spec debt_service_coverage_ratio(number(), number()) :: number()
   def debt_service_coverage_ratio(net_operating_income, annual_debt_service) do
     net_operating_income / annual_debt_service
   end

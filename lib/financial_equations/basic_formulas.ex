@@ -16,6 +16,7 @@ defmodule FinancialEquations.BasicFormulas do
       iex> FinancialEquations.BasicFormulas.simple_interest(1000, 0.05, 2)
       100.0
   """
+  @spec simple_interest(number(), number(), number()) :: number()
   def simple_interest(principal, rate, time) do
     principal * rate * time
   end
@@ -33,6 +34,7 @@ defmodule FinancialEquations.BasicFormulas do
       iex> FinancialEquations.BasicFormulas.compound_interest(1000, 0.05, 1, 2)
       1102.5
   """
+  @spec compound_interest(number(), number(), number(), number()) :: number()
   def compound_interest(principal, rate, periods, time) do
     principal * :math.pow(1 + rate / periods, periods * time)
   end
@@ -49,6 +51,7 @@ defmodule FinancialEquations.BasicFormulas do
       iex> FinancialEquations.BasicFormulas.future_value_single_sum(1000, 0.05, 2)
       1102.5
   """
+  @spec future_value_single_sum(number(), number(), number()) :: number()
   def future_value_single_sum(present_value, rate, time) do
     present_value * :math.pow(1 + rate, time)
   end
@@ -65,6 +68,7 @@ defmodule FinancialEquations.BasicFormulas do
       iex> FinancialEquations.BasicFormulas.present_value_single_sum(1102.5, 0.05, 2)
       1000.0
   """
+  @spec present_value_single_sum(number(), number(), number()) :: number()
   def present_value_single_sum(future_value, rate, time) do
     future_value / :math.pow(1 + rate, time)
   end
@@ -81,6 +85,7 @@ defmodule FinancialEquations.BasicFormulas do
       iex> FinancialEquations.BasicFormulas.future_value_annuity_ordinary(100, 0.05, 3)
       315.25
   """
+  @spec future_value_annuity_ordinary(number(), number(), number()) :: number()
   def future_value_annuity_ordinary(payment, rate, time) do
     payment * (:math.pow(1 + rate, time) - 1) / rate
   end
@@ -97,6 +102,7 @@ defmodule FinancialEquations.BasicFormulas do
       iex> FinancialEquations.BasicFormulas.present_value_annuity_ordinary(100, 0.05, 3)
       272.325
   """
+  @spec present_value_annuity_ordinary(number(), number(), number()) :: number()
   def present_value_annuity_ordinary(payment, rate, time) do
     payment * (1 - :math.pow(1 + rate, -time)) / rate
   end
@@ -113,6 +119,7 @@ defmodule FinancialEquations.BasicFormulas do
       iex> FinancialEquations.BasicFormulas.future_value_annuity_due(100, 0.05, 3)
       331.0125
   """
+  @spec future_value_annuity_due(number(), number(), number()) :: number()
   def future_value_annuity_due(payment, rate, time) do
     payment * (:math.pow(1 + rate, time) - 1) / rate * (1 + rate)
   end
@@ -129,6 +136,7 @@ defmodule FinancialEquations.BasicFormulas do
       iex> FinancialEquations.BasicFormulas.present_value_annuity_due(100, 0.05, 3)
       285.94125
   """
+  @spec present_value_annuity_due(number(), number(), number()) :: number()
   def present_value_annuity_due(payment, rate, time) do
     payment * (1 - :math.pow(1 + rate, -time)) / rate * (1 + rate)
   end
@@ -144,6 +152,7 @@ defmodule FinancialEquations.BasicFormulas do
       iex> FinancialEquations.BasicFormulas.present_value_perpetuity(100, 0.05)
       2000.0
   """
+  @spec present_value_perpetuity(number(), number()) :: number()
   def present_value_perpetuity(payment, rate) do
     payment / rate
   end
@@ -160,6 +169,7 @@ defmodule FinancialEquations.BasicFormulas do
       iex> FinancialEquations.BasicFormulas.present_value_growing_perpetuity(100, 0.05, 0.02)
       3333.3333333333335
   """
+  @spec present_value_growing_perpetuity(number(), number(), number()) :: number()
   def present_value_growing_perpetuity(payment, rate, growth_rate) do
     payment / (rate - growth_rate)
   end

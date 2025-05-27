@@ -16,8 +16,9 @@ defmodule FinancialEquations.TimeValueMoneyFormulas do
       iex> FinancialEquations.TimeValueMoneyFormulas.annuity_payment_ordinary(1000, 0.05, 3)
       367.208
   """
+  @spec annuity_payment_ordinary(float(), float(), integer()) :: float()
   def annuity_payment_ordinary(present_value, rate, periods) do
-    (rate * present_value) / (1 - :math.pow(1 + rate, -periods))
+    rate * present_value / (1 - :math.pow(1 + rate, -periods))
   end
 
   @doc """
@@ -32,8 +33,9 @@ defmodule FinancialEquations.TimeValueMoneyFormulas do
       iex> FinancialEquations.TimeValueMoneyFormulas.annuity_payment_due(1000, 0.05, 3)
       349.722
   """
+  @spec annuity_payment_due(float(), float(), integer()) :: float()
   def annuity_payment_due(present_value, rate, periods) do
-    (rate * present_value) / ((1 + rate) * (1 - :math.pow(1 + rate, -periods)))
+    rate * present_value / ((1 + rate) * (1 - :math.pow(1 + rate, -periods)))
   end
 
   @doc """
@@ -49,6 +51,7 @@ defmodule FinancialEquations.TimeValueMoneyFormulas do
       iex> FinancialEquations.TimeValueMoneyFormulas.growing_annuity_pv(100, 0.05, 0.02, 3)
       286.698
   """
+  @spec growing_annuity_pv(float(), float(), float(), integer()) :: float()
   def growing_annuity_pv(payment, rate, growth_rate, periods) do
     payment * (1 - :math.pow((1 + growth_rate) / (1 + rate), periods)) / (rate - growth_rate)
   end
@@ -66,8 +69,10 @@ defmodule FinancialEquations.TimeValueMoneyFormulas do
       iex> FinancialEquations.TimeValueMoneyFormulas.future_value_growing_annuity(100, 0.05, 0.02, 3)
       315.901
   """
+  @spec future_value_growing_annuity(float(), float(), float(), integer()) :: float()
   def future_value_growing_annuity(payment, rate, growth_rate, periods) do
-    payment * (:math.pow(1 + rate, periods) - :math.pow(1 + growth_rate, periods)) / (rate - growth_rate)
+    payment * (:math.pow(1 + rate, periods) - :math.pow(1 + growth_rate, periods)) /
+      (rate - growth_rate)
   end
 
   @doc """
@@ -82,7 +87,8 @@ defmodule FinancialEquations.TimeValueMoneyFormulas do
       iex> FinancialEquations.TimeValueMoneyFormulas.sinking_fund(1000, 0.05, 3)
       317.208
   """
+  @spec sinking_fund(float(), float(), integer()) :: float()
   def sinking_fund(future_value, rate, periods) do
-    (future_value * rate) / (:math.pow(1 + rate, periods) - 1)
+    future_value * rate / (:math.pow(1 + rate, periods) - 1)
   end
 end

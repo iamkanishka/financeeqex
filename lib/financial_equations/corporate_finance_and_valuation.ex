@@ -18,6 +18,7 @@ defmodule FinancialEquations.CorporateFinanceAndValuation do
       iex> FinanceValuation.wacc(100.0, 50.0, 150.0, 0.1, 0.05, 0.3)
       0.08333333333333333
   """
+  @spec wacc(float(), float(), float(), float(), float(), float()) :: float()
   def wacc(e, d, v, re, rd, t) do
     (e / v) * re + (d / v) * rd * (1 - t)
   end
@@ -33,6 +34,7 @@ defmodule FinancialEquations.CorporateFinanceAndValuation do
       iex> FinanceValuation.fcf(100.0, 30.0)
       70.0
   """
+  @spec fcf(float(), float()) :: float()
   def fcf(operating_cash_flow, capital_expenditures) do
     operating_cash_flow - capital_expenditures
   end
@@ -49,6 +51,7 @@ defmodule FinancialEquations.CorporateFinanceAndValuation do
       iex> FinanceValuation.ev(200.0, 50.0, 20.0)
       230.0
   """
+  @spec ev(float(), float(), float()) :: float()
   def ev(market_cap, debt, cash) do
     market_cap + debt - cash
   end
@@ -65,6 +68,7 @@ defmodule FinancialEquations.CorporateFinanceAndValuation do
       iex> FinanceValuation.equity_value(230.0, 50.0, 20.0)
       200.0
   """
+  @spec equity_value(float(), float(), float()) :: float()
   def equity_value(ev, debt, cash) do
     ev - debt + cash
   end
@@ -81,6 +85,7 @@ defmodule FinancialEquations.CorporateFinanceAndValuation do
       iex> FinanceValuation.dcf_valuation([100.0, 110.0], 0.1, 1000.0)
       918.1818181818182
   """
+  @spec dcf_valuation(list(), float(), float()) :: float()
   def dcf_valuation(fcfs, wacc, tv) do
     discounted_fcfs =
       fcfs
@@ -106,6 +111,7 @@ defmodule FinancialEquations.CorporateFinanceAndValuation do
       iex> FinanceValuation.levered_beta(1.0, 0.3, 50.0, 100.0)
       1.35
   """
+  @spec levered_beta(float(), float(), float(), float()) :: float()
   def levered_beta(bu, t, d, e) do
     bu * (1 + (1 - t) * (d / e))
   end
@@ -123,6 +129,7 @@ defmodule FinancialEquations.CorporateFinanceAndValuation do
       iex> FinanceValuation.unlevered_beta(1.35, 0.3, 50.0, 100.0)
       1.0
   """
+  @spec unlevered_beta(float(), float(), float(), float()) :: float()
   def unlevered_beta(bl, t, d, e) do
     bl / (1 + (1 - t) * (d / e))
   end
@@ -139,6 +146,7 @@ defmodule FinancialEquations.CorporateFinanceAndValuation do
       iex> FinanceValuation.eva(100.0, 0.1, 800.0)
       20.0
   """
+  @spec eva(float(), float(), float()) :: float()
   def eva(nopat, wacc, invested_capital) do
     nopat - (wacc * invested_capital)
   end
@@ -154,6 +162,7 @@ defmodule FinancialEquations.CorporateFinanceAndValuation do
       iex> FinanceValuation.dividend_payout_ratio(40.0, 100.0)
       0.4
   """
+  @spec dividend_payout_ratio(float(), float()) :: float()
   def dividend_payout_ratio(dividends, net_income) do
     dividends / net_income
   end
@@ -168,6 +177,7 @@ defmodule FinancialEquations.CorporateFinanceAndValuation do
       iex> FinanceValuation.retention_ratio(0.4)
       0.6
   """
+  @spec retention_ratio(float()) :: float()
   def retention_ratio(payout_ratio) do
     1 - payout_ratio
   end

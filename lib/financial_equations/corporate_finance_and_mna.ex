@@ -15,6 +15,7 @@ defmodule FinancialEquations.CorporateFinanceAndMna do
       iex> CorporateFinanceMNA.lbo_irr(2000.0, 1000.0, 2.0)
       0.4142
   """
+  @spec lbo_irr(float(), float(), float()) :: float()
   def lbo_irr(exit_equity_value, initial_equity_investment, t) do
     (:math.pow(exit_equity_value / initial_equity_investment, 1 / t) - 1)
   end
@@ -31,6 +32,7 @@ defmodule FinancialEquations.CorporateFinanceAndMna do
       iex> CorporateFinanceMNA.synergy_value(1500.0, 800.0, 600.0)
       100.0
   """
+  @spec synergy_value(float(), float(), float()) :: float()
   def synergy_value(pv_combined, pv_acquirer, pv_target) do
     pv_combined - pv_acquirer - pv_target
   end
@@ -46,6 +48,7 @@ defmodule FinancialEquations.CorporateFinanceAndMna do
       iex> CorporateFinanceMNA.goodwill(1200.0, 1000.0)
       200.0
   """
+  @spec goodwill(float(), float()) :: float()
   def goodwill(purchase_price, fair_market_value_net_assets) do
     purchase_price - fair_market_value_net_assets
   end
@@ -62,6 +65,7 @@ defmodule FinancialEquations.CorporateFinanceAndMna do
       iex> CorporateFinanceMNA.eoq(1000.0, 50.0, 2.0)
       500.0
   """
+  @spec eoq(float(), float(), float()) :: float()
   def eoq(d, s, h) do
     :math.sqrt((2 * d * s) / h)
   end
@@ -80,6 +84,7 @@ defmodule FinancialEquations.CorporateFinanceAndMna do
       iex> CorporateFinanceMNA.altman_z_score(0.2, 0.3, 0.1, 1.5, 1.0)
       3.55
   """
+  @spec altman_z_score(float(), float(), float(), float(), float()) :: float()
   def altman_z_score(a, b, c, d, e) do
     1.2 * a + 1.4 * b + 3.3 * c + 0.6 * d + 1.0 * e
   end

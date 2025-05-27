@@ -19,6 +19,7 @@ defmodule FinancialEquations.OptionsDerivativesFormulas do
       iex> FinancialEquations.OptionsDerivativesFormulas.black_scholes_call(100, 100, 1, 0.05, 0.2)
       10.450583
   """
+  @spec black_scholes_call(float(), float(), float(), float(), float()) :: float()
   def black_scholes_call(spot_price, strike_price, time_to_maturity, risk_free_rate, volatility) do
     {d1, d2} = calculate_d1_d2(spot_price, strike_price, time_to_maturity, risk_free_rate, volatility)
     spot_price * normal_cdf(d1) - strike_price * :math.exp(-risk_free_rate * time_to_maturity) * normal_cdf(d2)
@@ -38,6 +39,7 @@ defmodule FinancialEquations.OptionsDerivativesFormulas do
       iex> FinancialEquations.OptionsDerivativesFormulas.black_scholes_put(100, 100, 1, 0.05, 0.2)
       5.573526
   """
+  @spec black_scholes_put(float(), float(), float(), float(), float()) :: float()
   def black_scholes_put(spot_price, strike_price, time_to_maturity, risk_free_rate, volatility) do
     {d1, d2} = calculate_d1_d2(spot_price, strike_price, time_to_maturity, risk_free_rate, volatility)
     strike_price * :math.exp(-risk_free_rate * time_to_maturity) * normal_cdf(-d2) - spot_price * normal_cdf(-d1)
@@ -60,6 +62,7 @@ defmodule FinancialEquations.OptionsDerivativesFormulas do
       iex> FinancialEquations.OptionsDerivativesFormulas.put_call_parity(nil, 5.573526, 100, 100, 1, 0.05)
       10.450583
   """
+  @spec put_call_parity(float() | nil, float() | nil, float(), float(), float(), float()) :: float()
   def put_call_parity(call_price, put_price, spot_price, strike_price, time_to_maturity, risk_free_rate) do
     present_value_strike = strike_price * :math.exp(-risk_free_rate * time_to_maturity)
     case {call_price, put_price} do
@@ -84,6 +87,7 @@ defmodule FinancialEquations.OptionsDerivativesFormulas do
       iex> FinancialEquations.OptionsDerivativesFormulas.delta(100, 100, 1, 0.05, 0.2, :call)
       0.636831
   """
+  @spec delta(float(), float(), float(), float(), float(), :call | :put) :: float()
   def delta(spot_price, strike_price, time_to_maturity, risk_free_rate, volatility, option_type) do
     {d1, _d2} = calculate_d1_d2(spot_price, strike_price, time_to_maturity, risk_free_rate, volatility)
     case option_type do
@@ -107,6 +111,7 @@ defmodule FinancialEquations.OptionsDerivativesFormulas do
       iex> FinancialEquations.OptionsDerivativesFormulas.gamma(100, 100, 1, 0.05, 0.2)
       0.019676
   """
+  @spec gamma(float(), float(), float(), float(), float()) :: float()
   def gamma(spot_price, strike_price, time_to_maturity, risk_free_rate, volatility) do
     {d1, _d2} = calculate_d1_d2(spot_price, strike_price, time_to_maturity, risk_free_rate, volatility)
     normal_pdf(d1) / (spot_price * volatility * :math.sqrt(time_to_maturity))
@@ -129,6 +134,7 @@ defmodule FinancialEquations.OptionsDerivativesFormulas do
       iex> FinancialEquations.OptionsDerivativesFormulas.theta(100, 100, 1, 0.05, 0.2)
       -4.506986
   """
+  @spec theta(float(), float(), float(), float(), float()) :: float()
   def theta(spot_price, strike_price, time_to_maturity, risk_free_rate, volatility) do
     {d1, d2} = calculate_d1_d2(spot_price, strike_price, time_to_maturity, risk_free_rate, volatility)
     term1 = -(spot_price * volatility * normal_pdf(d1)) / (2 * :math.sqrt(time_to_maturity))
@@ -150,6 +156,7 @@ defmodule FinancialEquations.OptionsDerivativesFormulas do
       iex> FinancialEquations.OptionsDerivativesFormulas.vega(100, 100, 1, 0.05, 0.2)
       39.351847
   """
+  @spec vega(float(), float(), float(), float(), float()) :: float()
   def vega(spot_price, strike_price, time_to_maturity, risk_free_rate, volatility) do
     {d1, _d2} = calculate_d1_d2(spot_price, strike_price, time_to_maturity, risk_free_rate, volatility)
     spot_price * :math.sqrt(time_to_maturity) * normal_pdf(d1)
@@ -174,6 +181,7 @@ defmodule FinancialEquations.OptionsDerivativesFormulas do
       iex> FinancialEquations.OptionsDerivativesFormulas.implied_volatility(10.450583, 100, 100, 1, 0.05, 0.1)
       0.2
   """
+  @spec implied_volatility(float(), float(), float(), float(), float(), float(), integer(), float()) :: float()
   def implied_volatility(market_price, spot_price, strike_price, time_to_maturity, risk_free_rate, initial_guess, max_iterations \\ 100, tolerance \\ 0.0001) do
     newton_raphson(
       initial_guess,
@@ -189,6 +197,7 @@ defmodule FinancialEquations.OptionsDerivativesFormulas do
   end
 
   # Helper function to calculate d1 and d2 for Black-Scholes
+  @spec calculate_d1_d2(float(), float(), float(), float(), float()) :: {float(), float()}
   defp calculate_d1_d2(spot_price, strike_price, time_to_maturity, risk_free_rate, volatility) do
     d1 =
       (:math.log(spot_price / strike_price) +
@@ -200,6 +209,7 @@ defmodule FinancialEquations.OptionsDerivativesFormulas do
   end
 
   # Approximation of the cumulative distribution function (CDF) for a standard normal distribution
+  @spec normal_cdf(float()) :: float()
   defp normal_cdf(x) do
     # Using the Abramowitz and Stegun approximation for standard normal CDF
     t = 1 / (1 + 0.2316419 * abs(x))
@@ -209,11 +219,13 @@ defmodule FinancialEquations.OptionsDerivativesFormulas do
   end
 
   # Probability density function (PDF) for a standard normal distribution
+  @spec normal_pdf(float()) :: float()
   defp normal_pdf(x) do
     0.39894228 * :math.exp(-x * x / 2)
   end
 
   # Newton-Raphson method for solving implied volatility
+  @spec newton_raphson(float(), (float() -> float()), (float() -> float()), integer(), float(), integer()) :: float()
   defp newton_raphson(guess, f, f_prime, max_iterations, tolerance, iteration \\ 0) do
     fx = f.(guess)
     if abs(fx) < tolerance || iteration >= max_iterations do

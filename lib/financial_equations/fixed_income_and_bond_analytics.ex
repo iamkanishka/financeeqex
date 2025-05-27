@@ -16,6 +16,7 @@ defmodule FinancialEquations.FixedIncomeAndBondAnalytics do
       iex> BondAnalysis.ytc(950.0, 1000.0, 50.0, 5.0)
       0.0641
   """
+  @spec ytc(float(), float(), float(), float()) :: float()
   def ytc(price, call_price, coupon, years_to_call) do
     # YTC is approximated using the formula: (Coupon + (Call Price - Price) / Years) / ((Call Price + Price) / 2)
     annual_gain = (call_price - price) / years_to_call
@@ -35,6 +36,7 @@ defmodule FinancialEquations.FixedIncomeAndBondAnalytics do
       iex> BondAnalysis.ytw(0.06, 0.05, 0.07)
       0.05
   """
+  @spec ytw(float(), float(), float()) :: float()
   def ytw(ytm, ytc, ytp) do
     Enum.min([ytm, ytc, ytp])
   end
@@ -49,6 +51,7 @@ defmodule FinancialEquations.FixedIncomeAndBondAnalytics do
       iex> BondAnalysis.bey(0.03)
       0.0618
   """
+  @spec bey(float()) :: float()
   def bey(semi_annual_yield) do
     2 * (:math.pow(1 + semi_annual_yield, 2) - 1)
   end
@@ -64,6 +67,7 @@ defmodule FinancialEquations.FixedIncomeAndBondAnalytics do
       iex> BondAnalysis.tey(0.04, 0.3)
       0.0571
   """
+  @spec tey(float(), float()) :: float()
   def tey(tax_free_yield, marginal_tax_rate) do
     tax_free_yield / (1 - marginal_tax_rate)
   end
@@ -80,6 +84,7 @@ defmodule FinancialEquations.FixedIncomeAndBondAnalytics do
       iex> BondAnalysis.zero_coupon_bond_price(1000.0, 0.05, 2.0)
       905.9507
   """
+  @spec zero_coupon_bond_price(float(), float(), float()) :: float()
   def zero_coupon_bond_price(face_value, yield, years) do
     face_value / :math.pow(1 + yield, years)
   end
@@ -96,6 +101,7 @@ defmodule FinancialEquations.FixedIncomeAndBondAnalytics do
       iex> BondAnalysis.spot_rate(905.9507, 1000.0, 2.0)
       0.05
   """
+  @spec spot_rate(float(), float(), float()) :: float()
   def spot_rate(price, face_value, years) do
     (:math.pow(face_value / price, 1 / years) - 1)
   end
@@ -113,6 +119,7 @@ defmodule FinancialEquations.FixedIncomeAndBondAnalytics do
       iex> BondAnalysis.forward_rate(0.05, 0.04, 2.0, 1.0)
       0.0601
   """
+  @spec forward_rate(float(), float(), float(), float()) :: float()
   def forward_rate(spot_rate_n, spot_rate_t, n, t) do
     term1 = (1 + spot_rate_n) |> :math.pow(n)
     term2 = (1 + spot_rate_t) |> :math.pow(t)

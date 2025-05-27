@@ -16,6 +16,7 @@ defmodule FinancialEquations.DerivativesAndHedging do
       iex> DerivativesHedging.futures_price(100.0, 0.05, 0.02, 1.0)
       102.9701
   """
+  @spec futures_price(float(), float(), float(), float()) :: float()
   def futures_price(spot_price, r, q, t) do
     spot_price * :math.exp((r - q) * t)
   end
@@ -32,6 +33,7 @@ defmodule FinancialEquations.DerivativesAndHedging do
       iex> DerivativesHedging.hedge_ratio(0.9, 0.2, 0.15)
       1.2
   """
+  @spec hedge_ratio(float(), float(), float()) :: float()
   def hedge_ratio(p, sigma_s, sigma_f) do
     p * (sigma_s / sigma_f)
   end
@@ -47,6 +49,7 @@ defmodule FinancialEquations.DerivativesAndHedging do
       iex> DerivativesHedging.swap_value(1000.0, 980.0)
       20.0
   """
+  @spec swap_value(float(), float()) :: float()
   def swap_value(b_fixed, b_floating) do
     b_fixed - b_floating
   end
@@ -62,6 +65,7 @@ defmodule FinancialEquations.DerivativesAndHedging do
       iex> DerivativesHedging.cds_spread(50000.0, 10000000.0)
       50.0
   """
+  @spec cds_spread(float(), float()) :: float()
   def cds_spread(premium, notional) do
     (premium / notional) * 10000
   end
